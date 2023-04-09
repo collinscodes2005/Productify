@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee List</title>
+</head>
+<body>
+    <h1>Employee List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+        <tbody id="employee-list">
+        </tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "http://localhost:8080/employees/",
+                type: "GET",
+                success: function(data) {
+                    var employees = data;
+                    var tableData = "";
+                    for (var i = 0; i < employees.length; i++) {
+                        tableData += "<tr><td>" + employees[i].id + "</td><td>" + employees[i].first_name + "</td><td>" + employees[i].email + "</td><td>" + employees[i].department + "</td></tr>";
+                    }
+                    $("#employee-list").html(tableData);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
