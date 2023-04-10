@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+ 
 
 # Create your views here.
 
@@ -25,7 +26,8 @@ class LoginView(APIView):
                 client_obj = client.objects.get(user_name=user_name, password=password)
             except client.DoesNotExist:
                 return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-            return Response({'success': 'Logged in successfully'}, status=status.HTTP_200_OK)
+          #  return Response({'success': 'Logged in successfully'}, status=status.HTTP_200_OK)
+            return redirect('table')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
