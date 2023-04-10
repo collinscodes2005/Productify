@@ -13,16 +13,27 @@ from .serializers import employeeSerializer
 
 #class based view 
 class employeeList(APIView):
-    #get function
+    
+    #to perform read operations on the api
     def get(self, request):
         employees1 = Employee.objects.all()
         serializer = employeeSerializer(employees1, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
-
+    #to perform create operations on the api
     def post(self, request):
-        pass
+        serializer = employeeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else :
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 #for frontend 
 def view_list(request):
     return render(request, 'index.html')
-    
+
+#for creatign employee
+def create(request):
+    return render(request, 'create.html')

@@ -2,6 +2,40 @@
 <html>
 <head>
     <title>Employee List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 50px auto;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
     <h1>Employee List</h1>
@@ -10,8 +44,8 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Department</th>
+                <th>Last name</th>
+              
             </tr>
         </thead>
         <tbody id="employee-list">
@@ -22,13 +56,13 @@
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: "http://localhost:8080/employees/",
+                url: "http://localhost:8000/employees/",
                 type: "GET",
                 success: function(data) {
                     var employees = data;
                     var tableData = "";
                     for (var i = 0; i < employees.length; i++) {
-                        tableData += "<tr><td>" + employees[i].id + "</td><td>" + employees[i].first_name + "</td><td>" + employees[i].email + "</td><td>" + employees[i].department + "</td></tr>";
+                        tableData += "<tr><td>" + employees[i].emplyee_id + "</td><td>" + employees[i].first_name + "</td><td>" + employees[i].last_name + "</td><td>" + "</td></tr>";
                     }
                     $("#employee-list").html(tableData);
                 }
