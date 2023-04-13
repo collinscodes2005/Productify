@@ -21,3 +21,5 @@ class client(models.Model):
     #string representation
     def __str__(self):
         return f"{self.user_name}"
+
+        

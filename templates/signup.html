@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Signup Form</h1>
+    <form id="signupForm" method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" name="user_name" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required><br>
+
+        <input type="submit" value="Signup">
+    </form>
+    <script>
+        // $(document).ready(function () {
+        //     $("#signupForm").submit(function (event) {
+        //         event.preventDefault(); // prevent the form from submitting normally
+        //         var formData = $(this).serialize(); // serialize the form data into a string
+        //         $.ajax({
+        //             url: "http://127.0.0.1:8000/signup/",
+        //             method: "POST",
+        //             data: formData,
+        //             success: function (response) {
+        //                 alert("Signup successful!");
+        //                 $("#signupForm")[0].reset(); // clear the form
+        //             },
+        //             error: function (xhr, status, error) {
+        //                 alert("Signup failed: " + xhr.responseText);
+
+    </script>
+</body>
+
+</html>
