@@ -12,8 +12,7 @@ from . models import Employee, client
 from .serializers import employeeSerializer, clientSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
-
-
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 #Login view
 class LoginView(APIView):
@@ -48,6 +47,9 @@ class LoginView(APIView):
 
 #class based view
 class employeeList(APIView):
+
+    authentication_classes = [JWTAuthentication]
+    
 
     #restricting the access:
     permission_classes = [IsAuthenticated]
