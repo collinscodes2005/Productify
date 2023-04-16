@@ -49,7 +49,7 @@ class LoginView(APIView):
 class employeeList(APIView):
 
     authentication_classes = [JWTAuthentication]
-    
+
 
     #restricting the access:
     permission_classes = [IsAuthenticated]
@@ -69,6 +69,10 @@ class employeeList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else :
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+##view to refresg tghe access tokens for ysers 
+class Refresh(APIView):
+   pass
 
 
 #sign up view
