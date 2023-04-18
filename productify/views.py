@@ -8,8 +8,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from . models import Employee, client
-from .serializers import employeeSerializer, clientSerializer
+from . models import Employee, client, task
+from .serializers import employeeSerializer, clientSerializer, taskSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -48,11 +48,11 @@ class LoginView(APIView):
 #class based view
 class employeeList(APIView):
 
-    authentication_classes = [JWTAuthentication]
+  #  authentication_classes = [JWTAuthentication]
 
 
     #restricting the access:
-    permission_classes = [IsAuthenticated]
+   # permission_classes = [IsAuthenticated]
 
     #to perform read operations on the api
     def get(self, request):
@@ -71,8 +71,21 @@ class employeeList(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 ##view to refresg tghe access tokens for ysers 
-class Refresh(APIView):
-   pass
+class Taskview(APIView):
+    def get(self, request):
+        task1 = task.objects.all()
+        serializer = taskSerializer(task1, many=True)
+        print("Get successful")
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    #to perform create operations on the api
+    def post(self, request):
+        serializer = taskSerializer()(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else :
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 #sign up view

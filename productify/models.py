@@ -23,3 +23,12 @@ class client(models.Model):
         return f"{self.user_name}"
 
         
+class task(models.Model):
+    id = models.AutoField(primary_key=True)
+    reminder = models.BooleanField(default=False)
+    text = models.CharField(max_length=230)
+    day = models.CharField(max_length=300)
+
+    def __str__(self):
+        return f"{self.day}"
+

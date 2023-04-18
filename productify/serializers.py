@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from . models import Employee, client
+from . models import Employee, client, task
 
 #employeeSerializer
 class employeeSerializer(serializers.ModelSerializer):
@@ -12,3 +12,9 @@ class clientSerializer(serializers.ModelSerializer):
     class Meta:
         model = client
         fields = ('user_name', 'password')
+#task serializer
+
+class taskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = task
+        fields = ('id', 'text', 'reminder', 'day')

@@ -11,8 +11,7 @@ urlpatterns = [
     path('log/', views.log, name="log"),
     path('signup/', views.SignUpView.as_view(), name="signup"),
     path('up/', views.up, name="up"),
-    path('refresh/', views.Refresh.as_view()),
-
-
-
+    path('tasks/', views.Taskview().as_view()),
 ]
+
+
