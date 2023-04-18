@@ -70,6 +70,17 @@ class employeeList(APIView):
         else :
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    #delete the particular api 
+    def delete(self, request, pk):
+        try:
+            task_entry = Task.objects.get(pk=pk)
+        except task.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        task_entry.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 ##view to refresg tghe access tokens for ysers 
 class Taskview(APIView):
     def get(self, request):
@@ -80,7 +91,7 @@ class Taskview(APIView):
 
     #to perform create operations on the api
     def post(self, request):
-        serializer = taskSerializer()(data=request.data)
+        serializer = taskSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

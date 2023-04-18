@@ -12,6 +12,8 @@ urlpatterns = [
     path('signup/', views.SignUpView.as_view(), name="signup"),
     path('up/', views.up, name="up"),
     path('tasks/', views.Taskview().as_view()),
+    path('task/<int:pk>/delete', views.deleteTask().as_view()),
+    
 ]
 
 
