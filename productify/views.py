@@ -70,10 +70,13 @@ class employeeList(APIView):
         else :
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    
+##class to delete the api data 
+class deleteTask(APIView):
     #delete the particular api 
     def delete(self, request, pk):
         try:
-            task_entry = Task.objects.get(pk=pk)
+            task_entry = task.objects.get(id=pk)
         except task.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
