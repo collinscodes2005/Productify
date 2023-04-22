@@ -84,6 +84,7 @@ class deleteTask(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+
 ##view to refresg tghe access tokens for ysers 
 class Taskview(APIView):
     def get(self, request):
@@ -98,6 +99,23 @@ class Taskview(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else :
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    #if request is a PUT request 
+    def put(self, request, pk):
+        try :
+            tasky = task.objects.get(id=pk)
+        except task.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+        serializer = taskSerializer(tasky, data=request.data)
+
+    #checking if the serializer is valid 
+        if serializer.is_valid() : 
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         else :
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
